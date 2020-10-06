@@ -23,9 +23,14 @@ struct ContentView: View {
                     .font(.headline)
                     .padding()
                 Spacer()
-                Button("\(self.displayMode.rawValue)") {
+                Button(action: {
                     if self.displayMode == .Face { self.displayMode = .Font }
                     else { self.displayMode = .Face }
+                }) {
+                    HStack {
+                        Image(systemName: "arrow.right.arrow.left.circle")
+                        Text("\(self.displayMode.rawValue)")
+                    }
                 }
                     .accentColor(colorScheme == .light ? Color.white : Color.black)
                     .padding(7)
