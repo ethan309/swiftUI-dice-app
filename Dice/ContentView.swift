@@ -47,7 +47,7 @@ struct ContentView: View {
                 }
             }
             Spacer()
-            Stepper("Dice: \(self.diceCountSelection)", value: $diceCountSelection, in: 1...6)
+            Stepper("Dice: \(self.diceCountSelection)", value: $diceCountSelection, in: 1...MAX_DICE_COUNT)
                 .padding([.horizontal], 40)
                 .padding([.bottom], 30)
             Button(action: {
