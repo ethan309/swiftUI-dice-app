@@ -49,7 +49,6 @@ struct ContentView: View {
                 self.diceValues = getRandomDiceValues(diceCountSelection)
             }) {
                 HStack {
-                    //Spacer()
                     Image(systemName: "play.fill")
                     Text("Roll!")
                 }
