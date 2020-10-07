@@ -15,6 +15,7 @@ struct ContentView: View {
     @State private var diceValues: [Int] = [5]
     
     @State private var displayMode: DisplayMode = .Face
+    @State private var showTotal: Bool = false
     
     var body: some View {
         VStack {
@@ -46,6 +47,9 @@ struct ContentView: View {
                         .frame(width: 100, height: 100, alignment: .center)
                 }
             }
+                .onTapGesture {
+                    self.showTotal = true
+                }
             Spacer()
             Stepper("Dice: \(self.diceCountSelection)", value: $diceCountSelection, in: 1...MAX_DICE_COUNT)
                 .padding([.horizontal], 40)
@@ -55,7 +59,7 @@ struct ContentView: View {
             }) {
                 HStack {
                     Image(systemName: "play.fill")
-                    Text("Roll!")
+                    Text("Roll")
                 }
                     .padding()
                     .padding([.horizontal], 125)
@@ -65,6 +69,11 @@ struct ContentView: View {
                 .cornerRadius(15)
                 .padding([.bottom], 20)
         }
+            .actionSheet(isPresented: self.$showTotal) {
+                ActionSheet(title: Text("Dice Total: \(self.diceValues.reduce(0, { $0 + $1 }))"),
+                            message: nil,
+                            buttons: [.default(Text("Dismiss"))])
+            }
     }
 }
 
