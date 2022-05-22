@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     
+    private let DEFAULT_DIE_VALUE = 1
     private let MAX_DICE_COUNT: Int = 6
     @State private var diceCountSelection: Int = 1
     @State private var diceValues: [Int] = [5]
@@ -51,7 +52,15 @@ struct ContentView: View {
                     self.showTotal = true
                 }
             Spacer()
-            Stepper("Dice: \(self.diceCountSelection)", value: $diceCountSelection, in: 1...MAX_DICE_COUNT)
+            Stepper("Dice: \(self.diceCountSelection)", value: $diceCountSelection, in: 1...MAX_DICE_COUNT, onEditingChanged: { isEnteringEditMode in
+                if !isEnteringEditMode {
+                    if diceCountSelection > diceValues.count {
+                        diceValues.append(contentsOf: Array(repeating: DEFAULT_DIE_VALUE, count: diceCountSelection - diceValues.count))
+                    } else if diceCountSelection < diceValues.count {
+                        diceValues = Array(diceValues.prefix(diceCountSelection))
+                    }
+                }
+            })
                 .padding([.horizontal], 40)
                 .padding([.bottom], 30)
             Button(action: {
