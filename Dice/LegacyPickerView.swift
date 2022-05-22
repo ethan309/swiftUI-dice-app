@@ -10,14 +10,13 @@ import SwiftUI
 struct LegacyPickerView: View {
     @State private var diceCountSelection: Int = 1
     @State private var diceValues: [Int] = []
-    private let MAX_DICE_COUNT: Int = 6
     
     var body: some View {
         VStack {
             Text("Selection: \(self.diceCountSelection)")
             Text("Dice: \(self.diceValues.count)")
             Picker("Number of Dice", selection: $diceCountSelection) {
-                ForEach(1..<MAX_DICE_COUNT + 1) {
+                ForEach(1..<6 + 1) {
                     Text("\($0)")
                 }
             }
