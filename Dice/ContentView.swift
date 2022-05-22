@@ -52,8 +52,8 @@ struct ContentView: View {
                     self.showTotal = true
                 }
             Spacer()
-            Stepper("Dice: \(self.diceCountSelection)", value: $diceCountSelection, in: 1...MAX_DICE_COUNT, onEditingChanged: { isEnteringEditMode in
-                if !isEnteringEditMode {
+            Stepper("Dice: \(self.diceCountSelection)", value: $diceCountSelection, in: 1...MAX_DICE_COUNT, onEditingChanged: { isStartGesture in
+                if !isStartGesture {
                     if diceCountSelection > diceValues.count {
                         diceValues.append(contentsOf: Array(repeating: DEFAULT_DIE_VALUE, count: diceCountSelection - diceValues.count))
                     } else if diceCountSelection < diceValues.count {
