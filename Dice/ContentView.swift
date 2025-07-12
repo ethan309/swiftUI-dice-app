@@ -78,11 +78,15 @@ struct ContentView: View {
                 .cornerRadius(15)
                 .padding([.bottom], 20)
         }
-            .actionSheet(isPresented: self.$showTotal) {
-                ActionSheet(title: Text("Dice Total: \(self.diceValues.reduce(0, { $0 + $1 }))"),
-                            message: nil,
-                            buttons: [.default(Text("Dismiss"))])
+        .alert("Dice Total: \(self.diceValues.reduce(0, { $0 + $1 }))", isPresented: self.$showTotal) {
+            Button("Copy") {
+                UIPasteboard.general.string = "\(self.diceValues.reduce(0, { $0 + $1 }))"
+                self.showTotal = false
             }
+            Button("Dismiss") {
+                self.showTotal = false
+            }
+        }
     }
 }
 
