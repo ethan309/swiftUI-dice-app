@@ -7,13 +7,14 @@
 
 import SwiftUI
 
+let DEFAULT_DIE_VALUE = 5
+let MAX_DICE_COUNT: Int = 6
+
 struct ContentView: View {
     @Environment(\.colorScheme) var colorScheme: ColorScheme
     
-    private let DEFAULT_DIE_VALUE = 1
-    private let MAX_DICE_COUNT: Int = 6
     @State private var diceCountSelection: Int = 1
-    @State private var diceValues: [Int] = [5]
+    @State private var diceValues: [Int] = [DEFAULT_DIE_VALUE]
     
     @State private var displayMode: DisplayMode = .Face
     @State private var showTotal: Bool = false
